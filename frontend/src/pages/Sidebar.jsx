@@ -1,5 +1,7 @@
-// ✅ src/pages/Sidebar.jsx
-import React, { useState } from 'react';
+// Sidebar.jsx
+import { NavLink } from "react-router-dom";
+import { FiSettings } from "react-icons/fi";
+import { HiOutlineLogout } from "react-icons/hi";
 import {
   FaTasks,
   FaComments,
@@ -9,46 +11,56 @@ import {
   FaVideo,
   FaCogs,
   FaSignOutAlt,
-} from 'react-icons/fa';
+  FaBars,
+  FaUserCircle
+} from "react-icons/fa";
+import logo from "../assets/logo.png";
 
-const Sidebar = ({ active, setActive }) => {
-  const topMenu = [
-    { label: 'Task', icon: <FaTasks /> },
-    { label: 'Live Chat', icon: <FaComments /> },
-    { label: 'PowerBI', icon: <FaChartBar /> },
-    { label: 'Workspace', icon: <FaProjectDiagram /> },
-    { label: 'Pipelines', icon: <FaStream /> },
-    { label: 'Meet', icon: <FaVideo /> },
-  ];
-
+export default function Sidebar({ toggleSlideMenu }) {
   return (
-    <div className="bg-[#1e293b] text-white h-screen w-64 flex flex-col justify-between p-4">
-      <div>
-        {topMenu.map((item) => (
-          <div
-            key={item.label}
-            className={`flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer mb-2 hover:bg-[#334155] transition ${
-              active === item.label ? 'bg-[#334155]' : ''
-            }`}
-            onClick={() => setActive(item.label)}
-          >
-            <span className="text-lg">{item.icon}</span>
-            <span className="text-sm">{item.label}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mb-4">
-        <div className="flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer hover:bg-[#334155] transition">
-          <FaCogs />
-          <span className="text-sm">Settings</span>
-        </div>
-        <div className="flex items-center gap-3 px-4 py-3 rounded-md cursor-pointer hover:bg-[#334155] transition mt-2">
-          <FaSignOutAlt />
-          <span className="text-sm">Logout</span>
-        </div>
-      </div>
-    </div>
-  );
-};
+    <aside className="fixed top-0 left-0 h-screen w-12 bg-[#1e293b] flex flex-col justify-between items-center py-4 z-20">
+      <div className="flex flex-col items-center gap-4">
+        <img
+          src={logo}
+          alt="Profile Logo"
+          className="w-8.5 h-8 rounded-full object-cover"
+        />
 
-export default Sidebar;
+        <button onClick={toggleSlideMenu}>
+          <FaBars className="text-white text-xl hover:text-gray-300" />
+        </button>
+      </div>
+
+      <div className="flex flex-col items-center gap-4">
+        <div className="relative group">
+          <NavLink to="/dashboard/profile">
+            <FaUserCircle className="text-white text-xl hover:text-gray-300" />
+          </NavLink>
+          <span className="absolute left-10 top-1/2 -translate-y-1/2 whitespace-nowrap bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Profile
+          </span>
+        </div>
+
+        <div className="relative group">
+          <NavLink to="/dashboard/settings">
+            <FiSettings className="text-white text-xl hover:text-gray-300" />
+          </NavLink>
+          <span className="absolute left-10 top-1/2 -translate-y-1/2 whitespace-nowrap bg-gray-800 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Settings
+          </span>
+        </div>
+
+        <div className="relative group">
+          <NavLink to="/logout">
+            <div className="w-10 h-7 flex items-center justify-center">
+              <HiOutlineLogout className="text-red-500 text-2xl hover:text-red-400 translate-x-[3px]" />
+            </div>
+          </NavLink>
+          <span className="absolute left-10 top-1/2 -translate-y-1/2 whitespace-nowrap bg-red-600 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+            Logout
+          </span>
+        </div>
+      </div>
+    </aside>
+  );
+}
