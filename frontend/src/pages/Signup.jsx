@@ -1,5 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import logo from '../assets/logo-profile.png';
+import illustration from '../assets/illustration.png';
+
 
 export default function Signup() {
   const [form, setForm] = useState({
@@ -40,9 +43,34 @@ export default function Signup() {
 
   // Track focus for phone field
   const [phoneFocused, setPhoneFocused] = useState(false);
-
+  
   return (
-    <div className="min-h-screen h-screen flex justify-end items-center bg-[#0f172a] font-sans p-0 overflow-hidden">
+    <div className="min-h-screen h-screen flex bg-[#0f172a] font-sans p-0 overflow-hidden">
+    <div className="w-1/2 min-w-[300px] bg-[#0f172a] flex justify-center items-center px-10 py-10">
+  <div className="flex flex-col justify-center items-start w-full max-w-[500px] h-full space-y-8">
+    
+    {/* Logo + Name */}
+    <div className="flex items-center gap-3">
+      <img src={logo} alt="Logo" className="h-10" />
+      <h1 className="text-white text-2xl font-bold">VLink CRM</h1>
+    </div>
+
+    {/* Illustration */}
+    <div className="w-full flex justify-center">
+      <img src={illustration} alt="Illustration" className="max-w-full h-auto" />
+    </div>
+
+    {/* Quote */}
+    <div className="text-left text-[#94a3b8] text-base leading-relaxed">
+      <p className="italic text-[1rem]">“Smart workflows. Smarter decisions.”</p>
+      <p className="text-[0.95rem] mt-1">Empower your supply chain from the very first login.</p>
+    </div>
+
+  </div>
+</div>
+
+
+
       <div className="mr-0 ml-0 mt-0 mb-0 max-w-[500px] w-full bg-[#1e293b] p-10 rounded-[4px] shadow-lg border-none h-full overflow-visible select-none flex flex-col justify-center signup-container-no-margin">
         <h2 className="mb-7 text-4xl font-extrabold text-white text-center tracking-tight" style={{ fontSize: '2.2rem', lineHeight: '4rem' }}>
           Create Account
@@ -395,5 +423,5 @@ export default function Signup() {
         }
       `}</style>
     </div>
-  );
+);
 }
